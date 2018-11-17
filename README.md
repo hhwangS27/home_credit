@@ -14,7 +14,7 @@ Include this code for using of schemas:
 from schemas import schemas
 ```
 
-# create our cassandra keyspace called 'quartet' using this code:
+# Create our cassandra keyspace called 'quartet' using this code:
 ```
 CREATE KEYSPACE quartet WITH REPLICATION = {'class': 'SimpleStrategy', 'replication_factor':2};
 ```
