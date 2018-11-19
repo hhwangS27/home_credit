@@ -40,7 +40,7 @@ def main(input_dir, keyspace_name):
                 df.write.format("org.apache.spark.sql.cassandra") \
                    .options(table=tableName, keyspace=keyspace_name).save()
 
-    break #not into subdirectories
+        break #not into subdirectories
 
 
 
