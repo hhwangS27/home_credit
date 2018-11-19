@@ -80,7 +80,7 @@ def outputSchemas(tableName_columns, desc, outputp):
 def outputCQLTables(tableName_columns, desc, outputp):
     output = ""
     for tableName, columns in tableName_columns.items():
-        output += "CREATE TABLE IF NOT EXISTS {}(\n"
+        output += "CREATE TABLE IF NOT EXISTS {}(\n".format(tableName)
         primary_key = []
         for c in columns:
             if c.startswith('SK_ID_'):
