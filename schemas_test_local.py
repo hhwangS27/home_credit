@@ -11,9 +11,9 @@ from IOYNtoBoolSets import IOtoBool, YNtoBool
 
 
 schema = types.StructType([
-                     types.StructField('sk_id_prev', types.StringType(), False),
-                     types.StructField('sk_id_curr', types.StringType(), False),
-                     types.StructField('months_balance', types.StringType(), True),
+                     types.StructField('sk_id_prev', types.LongType(), False),
+                     types.StructField('sk_id_curr', types.LongType(), False),
+                     types.StructField('months_balance', types.ShortType(), True),
                      types.StructField('amt_balance', types.DoubleType(), True),
                      types.StructField('amt_credit_limit_actual', types.DoubleType(), True),
                      types.StructField('amt_drawings_atm_current', types.DoubleType(), True),
@@ -26,14 +26,14 @@ schema = types.StructType([
                      types.StructField('amt_receivable_principal', types.DoubleType(), True),
                      types.StructField('amt_recivable', types.DoubleType(), True),
                      types.StructField('amt_total_receivable', types.DoubleType(), True),
-                     types.StructField('cnt_drawings_atm_current', types.StringType(), True),
-                     types.StructField('cnt_drawings_current', types.StringType(), True),
-                     types.StructField('cnt_drawings_other_current', types.StringType(), True),
-                     types.StructField('cnt_drawings_pos_current', types.StringType(), True),
-                     types.StructField('cnt_instalment_mature_cum', types.StringType(), True),
+                     types.StructField('cnt_drawings_atm_current', types.DoubleType(), True),
+                     types.StructField('cnt_drawings_current', types.DoubleType(), True),
+                     types.StructField('cnt_drawings_other_current', types.DoubleType(), True),
+                     types.StructField('cnt_drawings_pos_current', types.DoubleType(), True),
+                     types.StructField('cnt_instalment_mature_cum', types.DoubleType(), True),
                      types.StructField('name_contract_status', types.StringType(), True),
-                     types.StructField('sk_dpd', types.StringType(), True),
-                     types.StructField('sk_dpd_def', types.StringType(), True)
+                     types.StructField('sk_dpd', types.ShortType(), True),
+                     types.StructField('sk_dpd_def', types.ShortType(), True),
                 ])
 
 def main():
