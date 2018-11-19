@@ -1,5 +1,6 @@
 # spark-submit --packages datastax:spark-cassandra-connector:2.3.1-s_2.11 load_csvs_to_cassandra.py home_credit_data quartet
 import os, sys, re, os.path
+import uuid
 
 from cassandra.cluster import Cluster, BatchStatement
 
@@ -19,6 +20,8 @@ def main(input_dir, keyspace_name):
         .config('spark.cassandra.connection.host', ','.join(cluster_seeds)).getOrCreate()
     spk_cass.sparkContext.setLogLevel('WARN')
 
+    uuidUdf = functions.udf( lambda : str(uuid.uuid1()) )
+
     tableNames = ("application_test", "application_test", "bureau",
                   "bureau_balance", "credit_card_balance",
                   "installments_payments", "POS_CASH_balance",
@@ -26,20 +29,20 @@ def main(input_dir, keyspace_name):
     for tableName in tableNames:
         df = spk_cass.read.csv(input_dir+tableName+'.csv', schema=schemas[tableName],
                                header = True, sep =',')
-        print(tableName)
-        df.show()
-        #if tableName in IOtoBool:
-        #    for c in IOtoBool[tableName]:
-        #        df = df.withColumn('_'+c, df[c]==1).drop(c)
-        #        df = df.withColumnRenamed('_'+c, c)
+        if tableName in IOtoBool:
+            for c in IOtoBool[tableName]:
+                df = df.withColumn('_'+c, df[c]==1).drop(c)
+                df = df.withColumnRenamed('_'+c, c)
 
-        #if tableName in YNtoBool:
-        #    for c in YNtoBool[tableName]:
-        #        df = df.withColumn('_'+c, df[c]=='Y').drop(c)
-        #        df = df.withColumnRenamed('_'+c, c)
+        if tableName in YNtoBool:
+            for c in YNtoBool[tableName]:
+                df = df.withColumn('_'+c, df[c]=='Y').drop(c)
+                df = df.withColumnRenamed('_'+c, c)
 
-        #df.write.format("org.apache.spark.sql.cassandra") \
-        #   .options(table=tableName, keyspace=keyspace_name).save()
+        df = df.withColumn('uuid', uuidUdf)
+
+        df.write.format("org.apache.spark.sql.cassandra") \
+           .options(table=tableName, keyspace=keyspace_name).save()
 
 
 if __name__ == "__main__":

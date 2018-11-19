@@ -1,4 +1,5 @@
 CREATE TABLE IF NOT EXISTS installments_payments(
+uuid UUID,
 sk_id_prev BIGINT,
 sk_id_curr BIGINT,
 num_instalment_version INT,
@@ -7,9 +8,10 @@ days_instalment INT,
 days_entry_payment INT,
 amt_instalment DOUBLE,
 amt_payment DOUBLE,
-PRIMARY KEY (sk_id_prev,sk_id_curr));
+PRIMARY KEY (sk_id_prev,sk_id_curr,uuid));
 
 CREATE TABLE IF NOT EXISTS previous_application(
+uuid UUID,
 sk_id_prev BIGINT,
 sk_id_curr BIGINT,
 name_contract_type TEXT,
@@ -47,9 +49,10 @@ days_last_due_1st_version INT,
 days_last_due INT,
 days_termination INT,
 nflag_insured_on_approval SMALLINT,
-PRIMARY KEY (sk_id_prev,sk_id_curr));
+PRIMARY KEY (sk_id_prev,sk_id_curr,uuid));
 
 CREATE TABLE IF NOT EXISTS POS_CASH_balance(
+uuid UUID,
 sk_id_prev BIGINT,
 sk_id_curr BIGINT,
 months_balance INT,
@@ -58,9 +61,10 @@ cnt_instalment_future INT,
 name_contract_status TEXT,
 sk_dpd SMALLINT,
 sk_dpd_def SMALLINT,
-PRIMARY KEY (sk_id_prev,sk_id_curr));
+PRIMARY KEY (sk_id_prev,sk_id_curr,uuid));
 
 CREATE TABLE IF NOT EXISTS bureau(
+uuid UUID,
 sk_id_curr BIGINT,
 sk_id_bureau BIGINT,
 credit_active TEXT,
@@ -78,9 +82,10 @@ amt_credit_sum_overdue INT,
 credit_type TEXT,
 days_credit_update INT,
 amt_annuity INT,
-PRIMARY KEY (sk_id_curr,sk_id_bureau));
+PRIMARY KEY (sk_id_curr,sk_id_bureau,uuid));
 
 CREATE TABLE IF NOT EXISTS application_test(
+uuid UUID,
 sk_id_curr BIGINT,
 name_contract_type TEXT,
 code_gender TEXT,
@@ -202,9 +207,10 @@ amt_req_credit_bureau_week INT,
 amt_req_credit_bureau_mon INT,
 amt_req_credit_bureau_qrt INT,
 amt_req_credit_bureau_year INT,
-PRIMARY KEY (sk_id_curr));
+PRIMARY KEY (sk_id_curr,uuid));
 
 CREATE TABLE IF NOT EXISTS application_train(
+uuid UUID,
 sk_id_curr BIGINT,
 target SMALLINT,
 name_contract_type TEXT,
@@ -327,9 +333,10 @@ amt_req_credit_bureau_week INT,
 amt_req_credit_bureau_mon INT,
 amt_req_credit_bureau_qrt INT,
 amt_req_credit_bureau_year INT,
-PRIMARY KEY (sk_id_curr));
+PRIMARY KEY (sk_id_curr,uuid));
 
 CREATE TABLE IF NOT EXISTS credit_card_balance(
+uuid UUID,
 sk_id_prev BIGINT,
 sk_id_curr BIGINT,
 months_balance SMALLINT,
@@ -353,11 +360,12 @@ cnt_instalment_mature_cum INT,
 name_contract_status TEXT,
 sk_dpd SMALLINT,
 sk_dpd_def SMALLINT,
-PRIMARY KEY (sk_id_prev,sk_id_curr));
+PRIMARY KEY (sk_id_prev,sk_id_curr,uuid));
 
 CREATE TABLE IF NOT EXISTS bureau_balance(
+uuid UUID,
 sk_id_bureau BIGINT,
 months_balance SMALLINT,
 status TEXT,
-PRIMARY KEY (sk_id_bureau));
+PRIMARY KEY (sk_id_bureau,uuid));
 
