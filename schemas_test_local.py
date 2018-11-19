@@ -1,5 +1,15 @@
 #use csvs in 20LineCSVs
 
+
+# spark-submit --packages datastax:spark-cassandra-connector:2.3.1-s_2.11 load_csvs_to_cassandra.py home_credit_data quartet
+import os, sys, re, os.path
+
+from pyspark.sql import SparkSession, functions, types, Row
+
+from schemas import schemas
+from IOYNtoBoolSets import IOtoBool, YNtoBool
+
+
 schema = types.StructType([
                      types.StructField('sk_id_prev', types.LongType(), False),
                      types.StructField('sk_id_curr', types.LongType(), False),
@@ -25,17 +35,6 @@ schema = types.StructType([
                      types.StructField('sk_dpd', types.ShortType(), True),
                      types.StructField('sk_dpd_def', types.ShortType(), True)
                 ])
-
-# spark-submit --packages datastax:spark-cassandra-connector:2.3.1-s_2.11 load_csvs_to_cassandra.py home_credit_data quartet
-import os, sys, re, os.path
-
-from pyspark.sql import SparkSession, functions, types, Row
-
-from schemas import schemas
-from IOYNtoBoolSets import IOtoBool, YNtoBool
-
-
-#df = spark.read.csv(dpath+fn, schema=schemas[tableName])
 
 def main():
     input_dir = "20LineCSVs/"
