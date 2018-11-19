@@ -1,4 +1,4 @@
-# spark-submit --packages datastax:spark-cassandra-connector:2.3.1-s_2.11 load_csvs_to_cassandra.py home_credit_data quartet
+# spark-submit --packages datastax:spark-cassandra-connector:2.3.1-s_2.11 load_csvs_to_cassandra.py home_credit_data/ quartet
 import os, sys, re, os.path
 import uuid
 
@@ -39,7 +39,7 @@ def main(input_dir, keyspace_name):
                 df = df.withColumn('_'+c, df[c]=='Y').drop(c)
                 df = df.withColumnRenamed('_'+c, c)
 
-        df = df.withColumn('uuid', uuidUdf)
+        df = df.withColumn('uuid', uuidUdf())
 
         df.write.format("org.apache.spark.sql.cassandra") \
            .options(table=tableName, keyspace=keyspace_name).save()
