@@ -19,31 +19,27 @@ def main(input_dir, keyspace_name):
         .config('spark.cassandra.connection.host', ','.join(cluster_seeds)).getOrCreate()
     spk_cass.sparkContext.setLogLevel('WARN')
 
-    tableNamec = re.compile(r"^(.+).csv$")
-    for (dpath, dnames, fnames) in os.walk(input_dir):
-        for fn in fnames:
-            tableName = tableNamec.match(fn)
-            if tableName:
-                tableName = tableName.group(1) # tableName is file name excluding of .csv suffix
-                print("haha"+tableName)
-                df = spk_cass.read.csv(dpath+fn, schema=schemas[tableName],
-                                       header = True)
-                #df.show()
-                #if tableName in IOtoBool:
-                #    for c in IOtoBool[tableName]:
-                #        df = df.withColumn('_'+c, df[c]==1).drop(c)
-                #        df = df.withColumnRenamed('_'+c, c)
+    tableNames = ("application_test", "application_test", "bureau",
+                  "bureau_balance", "credit_card_balance",
+                  "installments_payments", "POS_CASH_balance",
+                  "previous_application")
+    for tableName in tableNames:
+        print("haha"+tableName)
+        df = spk_cass.read.csv(dpath+fn, schema=schemas[tableName],
+                               header = True)
+        #df.show()
+        #if tableName in IOtoBool:
+        #    for c in IOtoBool[tableName]:
+        #        df = df.withColumn('_'+c, df[c]==1).drop(c)
+        #        df = df.withColumnRenamed('_'+c, c)
 
-                #if tableName in YNtoBool:
-                #    for c in YNtoBool[tableName]:
-                #        df = df.withColumn('_'+c, df[c]=='Y').drop(c)
-                #        df = df.withColumnRenamed('_'+c, c)
+        #if tableName in YNtoBool:
+        #    for c in YNtoBool[tableName]:
+        #        df = df.withColumn('_'+c, df[c]=='Y').drop(c)
+        #        df = df.withColumnRenamed('_'+c, c)
 
-                #df.write.format("org.apache.spark.sql.cassandra") \
-                #   .options(table=tableName, keyspace=keyspace_name).save()
-
-        break #not into subdirectories
-
+        #df.write.format("org.apache.spark.sql.cassandra") \
+        #   .options(table=tableName, keyspace=keyspace_name).save()
 
 
 if __name__ == "__main__":
