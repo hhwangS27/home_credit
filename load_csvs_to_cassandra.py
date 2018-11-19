@@ -22,7 +22,7 @@ def main(input_dir, keyspace_name):
 
     uuidUdf = functions.udf( lambda : str(uuid.uuid1()) )
 
-    tableNames = ("application_test", "application_test", "bureau",
+    tableNames = ("application_test", "application_train", "bureau",
                   "bureau_balance", "credit_card_balance",
                   "installments_payments", "POS_CASH_balance",
                   "previous_application")
