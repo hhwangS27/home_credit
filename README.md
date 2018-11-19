@@ -14,10 +14,13 @@ Include this code for using of schemas:
 from schemas import schemas
 ```
 
-# Create our cassandra keyspace called 'quartet' using this code:
+# Create our cassandra keyspace called 'quartet' and create all the tables:
+Firstly, log into cql using `cqlsh --cqlversion=3.4.2 199.60.17.188`
 ```
 CREATE KEYSPACE quartet WITH REPLICATION = {'class': 'SimpleStrategy', 'replication_factor':2};
+USE quartet;
 ```
+Then, paste all the command in cqltables.txt into the console.
 
 # Add `load_csvs_to_cassandra.py`
 
