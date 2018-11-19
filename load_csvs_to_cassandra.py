@@ -24,8 +24,7 @@ def main(input_dir, keyspace_name):
                   "installments_payments", "POS_CASH_balance",
                   "previous_application")
     for tableName in tableNames:
-        print("haha"+tableName)
-        df = spk_cass.read.csv(dpath+fn, schema=schemas[tableName],
+        df = spk_cass.read.csv(input_dir+tableName+'.csv', schema=schemas[tableName],
                                header = True)
         #df.show()
         #if tableName in IOtoBool:
