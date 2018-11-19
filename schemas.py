@@ -1,3 +1,5 @@
+#schemas = {tableName:schema, ...}
+
 schemas = {'installments_payments':
 types.StructType([
                      types.StructField('sk_id_prev', types.LongType(), False),

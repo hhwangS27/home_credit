@@ -6,6 +6,7 @@ from cassandra.cluster import Cluster, BatchStatement
 from pyspark.sql import SparkSession, functions, types, Row
 
 from schemas import schemas
+from IOYNtoBoolSets import IOtoBool, YNtoBool
 
 assert sys.version_info >= (3, 5) # make sure we have Python 3.5+
 
@@ -26,6 +27,16 @@ def main(input_dir, keyspace_name):
                 tableName = tableName.group(1) # tableName is file name excluding of .csv suffix
                 df = spk_cass.read.csv(dpath+fn, schema=schemas[tableName],
                                        header = True)
+                if tableName in IOtoBool:
+                    for c in IOtoBool[tableName]:
+                        df = df.withColumn('_'+c, df[c]==1).drop(c)
+                        df = df.withColumnRenamed('_'+c, c)
+
+                if tableName in YNtoBool:
+                    for c in YNtoBool[tableName]:
+                        df = df.withColumn('_'+c, df[c]=='Y').drop(c)
+                        df = df.withColumnRenamed('_'+c, c)
+
                 df.write.format("org.apache.spark.sql.cassandra") \
                    .options(table=tableName, keyspace=keyspace_name).save()
 
