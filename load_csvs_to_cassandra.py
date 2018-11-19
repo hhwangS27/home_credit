@@ -37,8 +37,9 @@ def main(input_dir, keyspace_name):
                         df = df.withColumn('_'+c, df[c]=='Y').drop(c)
                         df = df.withColumnRenamed('_'+c, c)
 
-                df.write.format("org.apache.spark.sql.cassandra") \
-                   .options(table=tableName, keyspace=keyspace_name).save()
+                df.show()
+                #df.write.format("org.apache.spark.sql.cassandra") \
+                #   .options(table=tableName, keyspace=keyspace_name).save()
 
         break #not into subdirectories
 
