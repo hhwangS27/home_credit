@@ -25,19 +25,20 @@ def main(input_dir, keyspace_name):
             tableName = tableNamec.match(fn)
             if tableName:
                 tableName = tableName.group(1) # tableName is file name excluding of .csv suffix
+                print(tableName)
                 df = spk_cass.read.csv(dpath+fn, schema=schemas[tableName],
                                        header = True)
-                if tableName in IOtoBool:
-                    for c in IOtoBool[tableName]:
-                        df = df.withColumn('_'+c, df[c]==1).drop(c)
-                        df = df.withColumnRenamed('_'+c, c)
-
-                if tableName in YNtoBool:
-                    for c in YNtoBool[tableName]:
-                        df = df.withColumn('_'+c, df[c]=='Y').drop(c)
-                        df = df.withColumnRenamed('_'+c, c)
-
                 df.show()
+                #if tableName in IOtoBool:
+                #    for c in IOtoBool[tableName]:
+                #        df = df.withColumn('_'+c, df[c]==1).drop(c)
+                #        df = df.withColumnRenamed('_'+c, c)
+
+                #if tableName in YNtoBool:
+                #    for c in YNtoBool[tableName]:
+                #        df = df.withColumn('_'+c, df[c]=='Y').drop(c)
+                #        df = df.withColumnRenamed('_'+c, c)
+
                 #df.write.format("org.apache.spark.sql.cassandra") \
                 #   .options(table=tableName, keyspace=keyspace_name).save()
 
