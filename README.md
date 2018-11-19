@@ -1,13 +1,17 @@
 Project Source: [Kaggle](https://www.kaggle.com/c/home-credit-default-risk)
 
+# Add `csv2schemasAndcqltables.py`
+
+In this script, it uses the csvs in folder `20LineCSVs/` to create the
+corresponding `schemas.py` and `cqltables.txt` based on
+the description file `HomeCredit_columns_description.csv`. 
+
 # Add `schemas.py`
 
-In this field, I defined a dict `schemas` who is like this:
+In this file, I defined a dict `schemas` who is like this:
 ```
 schemas = {tableName:schema, ...}
 ```
-There is some stuff to be done, like wether the column is nullable and now
-every type is set to be `types.StringType()` which needs to be specified.  
 
 Include this code for using of schemas:
 ```
