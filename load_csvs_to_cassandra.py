@@ -41,6 +41,9 @@ def main(input_dir, keyspace_name):
 
         df = df.withColumn('uuid', uuidUdf())
 
+        print(tableName)
+        df.show()
+
         df.write.format("org.apache.spark.sql.cassandra") \
            .options(table=tableName, keyspace=keyspace_name).save()
 
