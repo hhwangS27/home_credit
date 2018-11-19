@@ -1,5 +1,7 @@
 #schemas = {tableName:schema, ...}
 
+from pyspark.sql import SparkSession, functions, types, Row
+
 schemas = {'installments_payments':
 types.StructType([
                      types.StructField('sk_id_prev', types.LongType(), False),
