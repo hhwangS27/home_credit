@@ -13,7 +13,7 @@ def desc2dict(inputp):
             if row['Table']=="application_{train|test}.csv":
                 #for train
                 tableName = "application_train"
-                clmnName = row["Row"].replace(' ', '')
+                clmnName = row["Row"].replace(' ', '').lower()
                 schmT = row["DataFrame Type"].replace(' ', '')
                 cqlT = row["CQL Type"].replace(' ', '')
                 descdict[tableName+clmnName]={"schmT":schmT,"cqlT":cqlT}
@@ -25,7 +25,7 @@ def desc2dict(inputp):
             else:
                 tmp = targetc.match(row['Table'])
                 tableName = tmp.group(1)
-                clmnName = row["Row"].replace(' ', '')
+                clmnName = row["Row"].replace(' ', '').lower()
                 schmT = row["DataFrame Type"].replace(' ', '')
                 cqlT = row["CQL Type"].replace(' ', '')
                 descdict[tableName+clmnName]={"schmT":schmT,"cqlT":cqlT}
@@ -52,7 +52,9 @@ def outputSchemas(tableName_columns, desc, outputp):
     for tableName, columns in tableName_columns.items():
         output += "'{}':\ntypes.StructType([\n".format(tableName)
         for c in columns:
-            if c.startswith('SK_ID_'):
+            c = c.lower() # cassandra use lowercase of column names no matter what.
+                          # So we have to use lower case.
+            if c.startswith('sk_id_'):
                 nullable = "False"
             else:
                 nullable = "True"
@@ -83,7 +85,8 @@ def outputCQLTables(tableName_columns, desc, outputp):
         output += "CREATE TABLE IF NOT EXISTS {}(\n".format(tableName)
         primary_key = []
         for c in columns:
-            if c.startswith('SK_ID_'):
+            c = c.lower()
+            if c.startswith('sk_id_'):
                 primary_key.append(c)
 
             output += "{} {},\n" \

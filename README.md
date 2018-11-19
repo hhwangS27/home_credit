@@ -17,6 +17,10 @@ Include this code for using of schemas:
 ```
 from schemas import schemas
 ```
+Although we create all the tables using capitalized column names, cassandra
+will convert them to lowercase. So we have to use lowercase for our schemas, or
+cassandra will report an error.
+
 # Add `cqltables.txt`
 
 # Create our cassandra keyspace called 'quartet' and create all the tables:
