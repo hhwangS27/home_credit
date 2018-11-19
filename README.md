@@ -17,6 +17,7 @@ Include this code for using of schemas:
 ```
 from schemas import schemas
 ```
+# Add `cqltables.txt`
 
 # Create our cassandra keyspace called 'quartet' and create all the tables:
 Firstly, log into cql using `cqlsh --cqlversion=3.4.2 199.60.17.188`
