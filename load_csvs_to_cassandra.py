@@ -26,7 +26,7 @@ def main(input_dir, keyspace_name):
     for tableName in tableNames:
         df = spk_cass.read.csv(input_dir+tableName+'.csv', schema=schemas[tableName],
                                header = True)
-        #df.show()
+        df.show()
         #if tableName in IOtoBool:
         #    for c in IOtoBool[tableName]:
         #        df = df.withColumn('_'+c, df[c]==1).drop(c)
