@@ -21,7 +21,7 @@ def main():
                   "previous_application")
     #tableNames = ("credit_card_balance",)
     for tableName in tableNames:
-        df = spark.read.csv(input_dir+tableName+'.csv', schema=schema,
+        df = spark.read.csv(input_dir+tableName+'.csv', schema=schemas[tableName],
                                header = True, sep =',')
         print(tableName)
         df.show()
