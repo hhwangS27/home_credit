@@ -22,10 +22,11 @@ def main(input_dir, keyspace_name):
 
     uuidUdf = functions.udf( lambda : str(uuid.uuid1()) )
 
-    tableNames = ("application_test", "application_train", "bureau",
-                  "bureau_balance", "credit_card_balance",
-                  "installments_payments", "POS_CASH_balance",
-                  "previous_application")
+    #tableNames = ("application_test", "application_train", "bureau",
+    #              "bureau_balance", "credit_card_balance",
+    #              "installments_payments", "POS_CASH_balance",
+    #              "previous_application")
+    tableNames = ("pos_cash_balance", "previous_application")
     for tableName in tableNames:
         df = spk_cass.read.csv(input_dir+tableName+'.csv', schema=schemas[tableName],
                                header = True, sep =',')
