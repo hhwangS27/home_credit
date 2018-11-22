@@ -48,7 +48,7 @@ days_first_due INT,
 days_last_due_1st_version INT,
 days_last_due INT,
 days_termination INT,
-nflag_insured_on_approval SMALLINT,
+nflag_insured_on_approval BOOLEAN,
 PRIMARY KEY (sk_id_prev,sk_id_curr,uuid));
 
 CREATE TABLE IF NOT EXISTS POS_CASH_balance(

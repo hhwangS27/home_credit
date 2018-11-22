@@ -53,7 +53,7 @@ types.StructType([
                      types.StructField('days_termination', types.DoubleType(), True),
                      types.StructField('nflag_insured_on_approval', types.DoubleType(), True),
                 ]),
-'POS_CASH_balance':
+'pos_cash_balance':
 types.StructType([
                      types.StructField('sk_id_prev', types.LongType(), False),
                      types.StructField('sk_id_curr', types.LongType(), False),
