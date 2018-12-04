@@ -13,57 +13,69 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/home_credit$home_credit.coverage" NAME="home-credit Coverage Results" MODIFIED="1543533696195" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/home_credit$home_credit.coverage" NAME="home-credit Coverage Results" MODIFIED="1543827498908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="28234372">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.0" value="3" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.4" value="5" />
           <entry key="project.open.time.5" value="3" />
-          <entry key="project.opened" value="12" />
+          <entry key="project.open.time.6" value="1" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="csv" value="1" />
           <entry key="ipynb" value="10" />
-          <entry key="py" value="3" />
+          <entry key="py" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="IPNB" value="10" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="3" />
+          <entry key="Python" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="11049" />
+          <entry key="py" value="17064" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="11049" />
+          <entry key="Python" value="17064" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ETL.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="182" column="13" lean-forward="true" selection-start-line="182" selection-start-column="13" selection-end-line="182" selection-end-column="13" />
+            <state relative-caret-position="2102">
+              <caret line="184" selection-start-line="184" selection-end-line="184" />
               <folding>
-                <marker date="1543564299433" expanded="true" signature="1475:1477" ph="..." />
-                <marker date="1543564299433" expanded="true" signature="3578:3580" ph="..." />
-                <marker date="1543564299433" expanded="true" signature="10334:10340" ph="..." />
+                <marker date="1543799651800" expanded="true" signature="1495:1497" ph="..." />
+                <marker date="1543799651800" expanded="true" signature="3598:3600" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/model_train.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="122">
+              <caret line="118" column="30" selection-start-line="118" selection-start-column="30" selection-end-line="118" selection-end-column="30" />
+              <folding>
+                <marker date="1543895668827" expanded="true" signature="793:795" ph="..." />
               </folding>
             </state>
           </provider>
@@ -73,7 +85,7 @@
         <entry file="file://$PROJECT_DIR$/testtest.ipynb">
           <provider selected="true" editor-type-id="ipnb-editor">
             <state>
-              <selected id="25" />
+              <selected id="3" />
             </state>
           </provider>
         </entry>
@@ -83,8 +95,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="Jupyter Notebook" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -95,8 +107,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/EDA.ipynb" />
-        <option value="$PROJECT_DIR$/testtest.ipynb" />
         <option value="$PROJECT_DIR$/ETL.py" />
+        <option value="$PROJECT_DIR$/testtest.ipynb" />
+        <option value="$PROJECT_DIR$/model_train.py" />
       </list>
     </option>
   </component>
@@ -220,7 +233,7 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28898427" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2932761" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -267,21 +280,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testtest.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="27" />
+    <entry file="file://$PROJECT_DIR$/ETL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2102">
+          <caret line="184" selection-start-line="184" selection-end-line="184" />
+          <folding>
+            <marker date="1543799651800" expanded="true" signature="1495:1497" ph="..." />
+            <marker date="1543799651800" expanded="true" signature="3598:3600" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ETL.py">
+    <entry file="file://$PROJECT_DIR$/testtest.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model_train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="182" column="13" lean-forward="true" selection-start-line="182" selection-start-column="13" selection-end-line="182" selection-end-column="13" />
+        <state relative-caret-position="122">
+          <caret line="118" column="30" selection-start-line="118" selection-start-column="30" selection-end-line="118" selection-end-column="30" />
           <folding>
-            <marker date="1543564299433" expanded="true" signature="1475:1477" ph="..." />
-            <marker date="1543564299433" expanded="true" signature="3578:3580" ph="..." />
-            <marker date="1543564299433" expanded="true" signature="10334:10340" ph="..." />
+            <marker date="1543895668827" expanded="true" signature="793:795" ph="..." />
           </folding>
         </state>
       </provider>

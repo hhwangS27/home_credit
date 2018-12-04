@@ -14,7 +14,7 @@ def get_dummies_spark(df, group_var,table_name):
     pivot_cols = [f for f, t in df.dtypes if t == 'string']
     keys = pivot_cols + [group_var]
 
-    before = df.select(keys)
+    before = df.select(keys).na.fill('unknown')
 
     #function to recursively join a list of dataframes
     def join_all(dfs, keys):
@@ -35,6 +35,7 @@ def get_dummies_spark(df, group_var,table_name):
     encoded = join_all(combined, keys)
 
     # drop its original columns
+
     for col in pivot_cols:
         encoded = encoded.drop(col)
 
@@ -84,7 +85,7 @@ def count_categorical(df, group_var,table_name):
 
     return categorical_encoded
 
-def main():
+def ETL():
 
     #########################################################
     # load data from cassandra tables to dataframes
@@ -186,12 +187,3 @@ def main():
     ready_test = application_test.join(client_bureau_data_encoded,'sk_id_curr', how='left_outer')
 
     return ready_train, ready_test
-
-if __name__ == '__main__':
-
-    ready_train, ready_test = main()
-
-    # app_train_domain['CREDIT_INCOME_PERCENT'] = app_train_domain['AMT_CREDIT'] / app_train_domain['AMT_INCOME_TOTAL']
-    # app_train_domain['ANNUITY_INCOME_PERCENT'] = app_train_domain['AMT_ANNUITY'] / app_train_domain['AMT_INCOME_TOTAL']
-    # app_train_domain['CREDIT_TERM'] = app_train_domain['AMT_ANNUITY'] / app_train_domain['AMT_CREDIT']
-    # app_train_domain['DAYS_EMPLOYED_PERCENT'] = app_train_domain['DAYS_EMPLOYED'] / app_train_domain['DAYS_BIRTH']
