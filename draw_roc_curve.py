@@ -15,6 +15,7 @@ def draw_rocs():
 
     targetc = re.compile(r"^(.+).fprtpr$")
     for (dpath, dnames, fnames) in os.walk('rocs/'):
+        fnames.sort()
         for fn in fnames:
             fn_exc_suf = targetc.match(fn)
             if fn_exc_suf:
