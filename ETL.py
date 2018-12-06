@@ -90,21 +90,21 @@ def ETL():
     # load data from cassandra tables to dataframes
 
     application_train = spark.read.format("org.apache.spark.sql.cassandra") \
-        .options(table='application_train', keyspace='quartet').option("inferSchema", True).load().drop('uuid')
+        .options(table='application_train', keyspace='quartet').load().drop('uuid')
     application_test = spark.read.format("org.apache.spark.sql.cassandra") \
-        .options(table='application_test', keyspace='quartet').option("inferSchema", True).load().drop('uuid')
+        .options(table='application_test', keyspace='quartet').load().drop('uuid')
     bureau_balance = spark.read.format("org.apache.spark.sql.cassandra") \
-        .options(table='bureau_balance', keyspace='quartet').option("inferSchema", True).load().drop('uuid')
+        .options(table='bureau_balance', keyspace='quartet').load().drop('uuid')
     previous_application = spark.read.format("org.apache.spark.sql.cassandra") \
-        .options(table='previous_application', keyspace='quartet').option("inferSchema", True).load().drop('uuid')
+        .options(table='previous_application', keyspace='quartet').load().drop('uuid')
     installments_payments = spark.read.format("org.apache.spark.sql.cassandra") \
-        .options(table='installments_payments', keyspace='quartet').option("inferSchema", True).load().drop('uuid')
+        .options(table='installments_payments', keyspace='quartet').load().drop('uuid')
     credit_card_balance = spark.read.format("org.apache.spark.sql.cassandra") \
-        .options(table='credit_card_balance', keyspace='quartet').option("inferSchema", True).load().drop('uuid')
+        .options(table='credit_card_balance', keyspace='quartet').load().drop('uuid')
     bureau = spark.read.format("org.apache.spark.sql.cassandra") \
-        .options(table='bureau', keyspace='quartet').option("inferSchema", True).load().drop('uuid')
+        .options(table='bureau', keyspace='quartet').load().drop('uuid')
     POS_CASH_balance = spark.read.format("org.apache.spark.sql.cassandra") \
-        .options(table='pos_cash_balance', keyspace='quartet').option("inferSchema", True).load().drop('uuid')
+        .options(table='pos_cash_balance', keyspace='quartet').load().drop('uuid')
 
     #########################################################
     '''deal with bureau datasets, bureau and bureau_balance
