@@ -186,3 +186,11 @@ def ETL():
     ready_test = application_test.join(client_bureau_data_encoded,'sk_id_curr', how='left_outer')
 
     return ready_train, ready_test
+
+if __name__ == '__main__':
+
+    out_dir1 = sys.argv[1]
+    out_dir2 = sys.argv[2]
+    ready_train, ready_test = ETL()
+    ready_train.write.csv(out_dir1, mode='overwrite',header= True)
+    ready_test.write.csv(out_dir2, mode='overwrite', header= True)

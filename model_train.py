@@ -106,7 +106,7 @@ def model_training():
     features = list(set(ready_train.columns) - set(['sk_id_curr', 'target']))
     feature_assembler = VectorAssembler(inputCols=features, outputCol='features')
     # classifier
-    classifier = RandomForestClassifier(labelCol='target', maxBins=60, maxDepth=8)
+    classifier = RandomForestClassifier(labelCol='target', maxBins=60, maxDepth=6)
     # pipeline
     credit_pipeline = Pipeline(stages=[feature_assembler, classifier])
     # fit and see feature importance
@@ -130,7 +130,7 @@ def model_training():
     feature_assembler = VectorAssembler(inputCols=features, outputCol='features')
     classifier = GBTClassifier(labelCol='target', maxBins=60)
     pipeline = Pipeline(stages=[feature_assembler, classifier])
-    grid = ParamGridBuilder().addGrid(classifier.maxDepth,[5,6,7]).addGrid(classifier.stepSize,[0.05,0.1]).build()
+    grid = ParamGridBuilder().addGrid(classifier.maxDepth,[4,5,6]).addGrid(classifier.stepSize,[0.05,0.1]).build()
     evaluator = BinaryClassificationEvaluator(labelCol='target')
     cv = CrossValidator(estimator=pipeline, estimatorParamMaps=grid, evaluator=evaluator, numFolds= 5)
     cv_model = cv.fit(ready_train.fillna(-999))
@@ -145,3 +145,5 @@ if __name__ == '__main__':
     out_dir = sys.argv[1]
     home_credit_model = model_training()
     home_credit_model.save(out_dir)
+
+
