@@ -36,8 +36,7 @@ def get_dummies_spark(df, group_var,table_name):
 
     # drop its original columns
 
-    for col in pivot_cols:
-        encoded = encoded.drop(col)
+    encoded = encoded.drop(*pivot_cols)
 
     return encoded
 
@@ -173,7 +172,7 @@ def ETL():
 
     #################################################################
     '''now we have aggregated bureau data and previous application data for each current client,
-    we can join these 2 tables back to application train and application test to get the 
+    we can join these 2 tables back to application train and application test to get the
     ready-to-use training and testing sets for our ML model
     '''
     # we use left outer join because some application data may not have previous or bureau data, and we still need to keep those
