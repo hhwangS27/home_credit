@@ -43,12 +43,9 @@ def model_tuning():
     # use area under ROC instead of accuracy since we have unbalanced datasets (default metric for binaryclassificationevaluator)
 
 
-    #maxDepthes = [2, 3, 4, 5, 6]
-    #maxIter = [20, 50, 80]
-    #stepSize = [0.005, 0.02, 0.16, 0.64]
-    maxDepthes = [3, 4]
-    maxIter = [5, 7]
-    stepSize = [0.1, 0.2]
+    maxDepthes = [3, 4, 5, 6]
+    maxIter = [20, 50, 80]
+    stepSize = [0.005, 0.02, 0.16, 0.64]
 
 
     for maxI in maxIter:

@@ -41,3 +41,8 @@ To run this file, use this code (home_credit_data denotes the input dir, quartet
 ```
 spark-submit --packages datastax:spark-cassandra-connector:2.3.1-s_2.11 load_csvs_to_cassandra.py home_credit_data quartet
 ```
+
+
+# `model_tuning_prepare.py`
+# `model_tuning.py`
+# `draw_roc_curve.py`
