@@ -79,8 +79,6 @@ def model_training():
     # drop columns in the to_drop list
     ready_train = ready_train.drop(*to_drop)
 
-
-
     #########################################
     # remove columns with over 75% of missing values
     null_count = ready_train.select([count(when(isnull(c), c)).alias(c) for c in ready_train.columns]).collect()
@@ -147,3 +145,5 @@ if __name__ == '__main__':
     out_dir = sys.argv[1]
     home_credit_model = model_training()
     home_credit_model.save(out_dir)
+
+
