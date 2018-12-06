@@ -77,11 +77,7 @@ def model_training():
     print('******remove collinear features*********',to_drop)
 
     # drop columns in the to_drop list
-    for col in ready_train.columns:
-        if col in to_drop:
-            ready_train.drop(col)
-            #ready_test.drop(col)
-
+    ready_train = ready_train.drop(*to_drop)
 
     #########################################
     # remove columns with over 75% of missing values
@@ -94,10 +90,7 @@ def model_training():
             to_drop.append(col)
     print('********remove columns with 75% of missing value************',to_drop)
 
-    for col in ready_train.columns:
-        if col in to_drop:
-            ready_train.drop(col)
-            #ready_test.drop(col)
+    ready_train = ready_train.drop(*to_drop)
 
     print('*********number of features left after removing collinear and missing columns*************',len(ready_train.columns))
 
@@ -124,10 +117,7 @@ def model_training():
     zero_features = list(feature_importances[feature_importances['importance'] == 0.0]['feature'])
     print('*********remove features with zero importance***************',zero_features)
 
-    for col in ready_train.columns:
-        if col in zero_features:
-            ready_train.drop(col)
-            #ready_test.drop(col)
+    ready_train = ready_train.drop(*zero_features)
 
     print('************features left after model selection*****************',ready_train.columns)
     print('************number of features left************', len(ready_train.columns))
