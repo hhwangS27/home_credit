@@ -17,36 +17,9 @@ from pyspark.mllib.stat import Statistics
 import pandas as pd
 import numpy as np
 
-from ETL import get_dummies_spark
-
 def model_training():
 
-    ###################################
-    # after we read in the ready_train and ready_test, we first on-hot-encode the categorical data
-    ready_train = spark.read.option("inferSchema", True).csv('ready_train/',header=True)
-    train_cat_encoded = get_dummies_spark(ready_train,'sk_id_curr','ready_train')
-    numerical_feats = [f for f, t in ready_train.dtypes if t != 'string']
-    train_num_df = ready_train.select(numerical_feats)
-    ready_train = train_cat_encoded.join(train_num_df,on = 'sk_id_curr')
-    print('************finished one-hot-encoding the training set******************')
-    print('*************total number of features we have***********************',len(ready_train.columns))
-
-    # test_cat_encoded = get_dummies_spark(ready_test, 'sk_id_curr', 'ready_test')
-    # numerical_feats = [f for f, t in ready_test.dtypes if t != 'string']
-    # test_num_df = ready_test.select(numerical_feats)
-    # ready_test = test_cat_encoded.join(test_num_df, on='sk_id_curr')
-
-    #####################################
-    # feature generation
-    '''
-    CREDIT_INCOME_PERCENT: the percentage of the credit amount relative to a client's income
-    ANNUITY_INCOME_PERCENT: the percentage of the loan annuity relative to a client's income
-    CREDIT_TERM:  the length of the payment in months (since the annuity is the monthly amount due
-    '''
-    ready_train = ready_train.withColumn('credit_income_percent', ready_train.amt_credit / ready_train.amt_income_total)
-    ready_train = ready_train.withColumn('annuity_income_percent', ready_train.amt_annuity/ ready_train.amt_income_total)
-    ready_train = ready_train.withColumn('credit_term', ready_train.amt_annuity/ ready_train.amt_credit)
-    print('**************finished generating features from domain knowledge*************')
+    ready_train = spark.read.option("inferSchema", True).csv('/user/hwa125/ready_train2/',header=True)
 
     ######################################
     # remove invalid outliers
@@ -64,8 +37,8 @@ def model_training():
     to each other. These can decrease the model's availability to learn, decrease model interpretability, and decrease
      generalization performance on the test set. We want to remove these features.
     '''
-    # Threshold for removing correlated variables = 0.9
-    threshold = 0.9
+    # Threshold for removing correlated variables = 0.8
+    threshold = 0.8
     df = ready_train.drop('sk_id_curr').drop('target')
     col_names = df.columns
     features = df.rdd.map(lambda row: row[0:])
@@ -73,8 +46,8 @@ def model_training():
     corr_df = pd.DataFrame(corr_mat)
     corr_df.index, corr_df.columns = col_names, col_names
     upper = corr_df.where(np.triu(np.ones(corr_df.shape), k=1).astype(np.bool))
-    to_drop = [column for column in upper.columns if any(upper[column] > threshold)]
-    print('******remove collinear features*********',to_drop)
+    to_drop = [column for column in upper.columns if any(abs(upper[column]) > threshold)]
+    print('******remove collinear features*********',len(to_drop))
 
     # drop columns in the to_drop list
     ready_train = ready_train.drop(*to_drop)
@@ -88,7 +61,7 @@ def model_training():
     for col in ready_train.columns:
         if null_count[0][col] > threshold:
             to_drop.append(col)
-    print('********remove columns with 75% of missing value************',to_drop)
+    print('********remove columns with 75% of missing value************',len(to_drop))
 
     ready_train = ready_train.drop(*to_drop)
 
@@ -110,16 +83,16 @@ def model_training():
     # pipeline
     credit_pipeline = Pipeline(stages=[feature_assembler, classifier])
     # fit and see feature importance
-    credit_model = credit_pipeline.fit(ready_train.na.fill(-999))
+    credit_model = credit_pipeline.fit(ready_train.na.fill(-999999))
     # get features with zero importance and drop them
     feature_importances = pd.DataFrame({'feature': features, 'importance': credit_model.stages[-1].featureImportances})\
         .sort_values('importance', ascending=False)
     zero_features = list(feature_importances[feature_importances['importance'] == 0.0]['feature'])
-    print('*********remove features with zero importance***************',zero_features)
+    print('*********remove features with zero importance***************',len(zero_features))
 
     ready_train = ready_train.drop(*zero_features)
 
-    print('************features left after model selection*****************',ready_train.columns)
+    #print('************features left after model selection*****************',ready_train.columns)
     print('************number of features left************', len(ready_train.columns))
     print('************get best model through cross validation*************')
 
@@ -128,15 +101,18 @@ def model_training():
     # use area under ROC instead of accuracy since we have unbalanced datasets (default metric for binaryclassificationevaluator)
     features = list(set(ready_train.columns) - set(['sk_id_curr', 'target']))
     feature_assembler = VectorAssembler(inputCols=features, outputCol='features')
-    classifier = GBTClassifier(labelCol='target', maxBins=60)
+    classifier = GBTClassifier(labelCol='target', maxBins=60,stepSize=0.05)
     pipeline = Pipeline(stages=[feature_assembler, classifier])
-    grid = ParamGridBuilder().addGrid(classifier.maxDepth,[4,5,6]).addGrid(classifier.stepSize,[0.05,0.1]).build()
+    #grid = ParamGridBuilder().addGrid(classifier.maxDepth,[4,5]).addGrid(classifier.stepSize,[0.05,0.1]).build()
+    grid = ParamGridBuilder().addGrid(classifier.maxDepth, [4, 5]).build()
     evaluator = BinaryClassificationEvaluator(labelCol='target')
     cv = CrossValidator(estimator=pipeline, estimatorParamMaps=grid, evaluator=evaluator, numFolds= 5)
-    cv_model = cv.fit(ready_train.fillna(-999))
+    cv_model = cv.fit(ready_train.fillna(-999999))
+    print('cross validation metrics',cv_model.avgMetrics)
     model = cv_model.bestModel
     # print best model hyperparameters
     print(model.stages[1].extractParamMap())
+    #model = pipeline.fit(ready_train.na.fill(-999999))
 
     return model
 

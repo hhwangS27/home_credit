@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df319da1-3bc2-4d48-b0f0-418023efdccd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/hs_err_pid74705.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testtest.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testtest.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,44 +13,44 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/home_credit$home_credit.coverage" NAME="home-credit Coverage Results" MODIFIED="1543983369188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/home_credit$home_credit.coverage" NAME="home-credit Coverage Results" MODIFIED="1544061225341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="28234372">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="15" />
+          <entry key="project.closed" value="17" />
           <entry key="project.open.time.0" value="3" />
-          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.1" value="3" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.4" value="5" />
           <entry key="project.open.time.5" value="7" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="18" />
+          <entry key="project.opened" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="csv" value="1" />
           <entry key="ipynb" value="12" />
-          <entry key="py" value="5" />
+          <entry key="py" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="IPNB" value="12" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="5" />
+          <entry key="Python" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="18813" />
+          <entry key="py" value="19123" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="18813" />
+          <entry key="Python" value="19123" />
         </counts>
       </usages-collector>
     </session>
@@ -59,24 +60,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ETL.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1389">
-              <caret line="196" column="66" lean-forward="true" selection-start-line="196" selection-start-column="66" selection-end-line="196" selection-end-column="66" />
-              <folding>
-                <marker date="1543972397839" expanded="true" signature="1495:1497" ph="..." />
-                <marker date="1543972397839" expanded="true" signature="3598:3600" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/model_train.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="133" column="64" lean-forward="true" selection-start-line="133" selection-start-column="64" selection-end-line="133" selection-end-column="64" />
-              <folding>
-                <marker date="1544057079002" expanded="true" signature="788:790" ph="..." />
-              </folding>
+            <state relative-caret-position="-418">
+              <caret line="31" column="34" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -85,7 +70,19 @@
         <entry file="file://$PROJECT_DIR$/testtest.ipynb">
           <provider selected="true" editor-type-id="ipnb-editor">
             <state>
-              <selected id="6" />
+              <selected id="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/model_train.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="109" column="50" lean-forward="true" selection-start-line="109" selection-start-column="50" selection-end-line="109" selection-end-column="50" />
+              <folding>
+                <marker date="1544075614217" expanded="true" signature="754:755" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -233,7 +230,7 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31402004" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32260373" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -283,27 +280,23 @@
     <entry file="file://$PROJECT_DIR$/testtest.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
-          <selected id="6" />
+          <selected id="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ETL.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1389">
-          <caret line="196" column="66" lean-forward="true" selection-start-line="196" selection-start-column="66" selection-end-line="196" selection-end-column="66" />
-          <folding>
-            <marker date="1543972397839" expanded="true" signature="1495:1497" ph="..." />
-            <marker date="1543972397839" expanded="true" signature="3598:3600" ph="..." />
-          </folding>
+        <state relative-caret-position="-418">
+          <caret line="31" column="34" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model_train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="133" column="64" lean-forward="true" selection-start-line="133" selection-start-column="64" selection-end-line="133" selection-end-column="64" />
+        <state relative-caret-position="187">
+          <caret line="109" column="50" lean-forward="true" selection-start-line="109" selection-start-column="50" selection-end-line="109" selection-end-column="50" />
           <folding>
-            <marker date="1544057079002" expanded="true" signature="788:790" ph="..." />
+            <marker date="1544075614217" expanded="true" signature="754:755" ph="..." />
           </folding>
         </state>
       </provider>
