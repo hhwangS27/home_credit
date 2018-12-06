@@ -42,7 +42,7 @@ def model_training():
     df = ready_train.drop('sk_id_curr').drop('target')
     col_names = df.columns
     features = df.rdd.map(lambda row: row[0:])
-    corr_mat = Statistics.corr(features, method="pearson")
+    corr_mat = Statistics.corr(features, method="spearman")
     corr_mat = np.abs(corr_mat)
     corr_df = pd.DataFrame(corr_mat)
     corr_df.index, corr_df.columns = col_names, col_names
@@ -104,8 +104,7 @@ def model_training():
     feature_assembler = VectorAssembler(inputCols=features, outputCol='features')
     classifier = GBTClassifier(labelCol='target', maxBins=60,stepSize=0.05)
     pipeline = Pipeline(stages=[feature_assembler, classifier])
-    #grid = ParamGridBuilder().addGrid(classifier.maxDepth,[4,5]).addGrid(classifier.stepSize,[0.05,0.1]).build()
-    grid = ParamGridBuilder().addGrid(classifier.maxDepth, [4, 5]).build()
+    grid = ParamGridBuilder().addGrid(classifier.maxDepth,[4,5]).addGrid(classifier.stepSize,[0.05,0.1]).build()
     evaluator = BinaryClassificationEvaluator(labelCol='target')
     cv = CrossValidator(estimator=pipeline, estimatorParamMaps=grid, evaluator=evaluator, numFolds= 5)
     cv_model = cv.fit(ready_train.fillna(-999999))
@@ -113,7 +112,6 @@ def model_training():
     model = cv_model.bestModel
     # print best model hyperparameters
     print(model.stages[1].extractParamMap())
-    #model = pipeline.fit(ready_train.na.fill(-999999))
 
     return model
 
