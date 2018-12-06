@@ -42,7 +42,7 @@ def model_training():
     df = ready_train.drop('sk_id_curr').drop('target')
     col_names = df.columns
     features = df.rdd.map(lambda row: row[0:])
-    corr_mat = Statistics.corr(features, method="spearman")
+    corr_mat = Statistics.corr(features, method="pearson")
     corr_mat = np.abs(corr_mat)
     corr_df = pd.DataFrame(corr_mat)
     corr_df.index, corr_df.columns = col_names, col_names
@@ -102,9 +102,9 @@ def model_training():
     # use area under ROC instead of accuracy since we have unbalanced datasets (default metric for binaryclassificationevaluator)
     features = list(set(ready_train.columns) - set(['sk_id_curr', 'target']))
     feature_assembler = VectorAssembler(inputCols=features, outputCol='features')
-    classifier = GBTClassifier(labelCol='target', maxBins=60,stepSize=0.05)
+    classifier = GBTClassifier(labelCol='target', maxBins=60, maxIter=100)
     pipeline = Pipeline(stages=[feature_assembler, classifier])
-    grid = ParamGridBuilder().addGrid(classifier.maxDepth,[4,5]).addGrid(classifier.stepSize,[0.05,0.1]).build()
+    grid = ParamGridBuilder().addGrid(classifier.maxDepth,[4,5,6]).addGrid(classifier.stepSize,[0.01,0.05,0.1]).build()
     evaluator = BinaryClassificationEvaluator(labelCol='target')
     cv = CrossValidator(estimator=pipeline, estimatorParamMaps=grid, evaluator=evaluator, numFolds= 5)
     cv_model = cv.fit(ready_train.fillna(-999999))
