@@ -43,6 +43,7 @@ def model_training():
     col_names = df.columns
     features = df.rdd.map(lambda row: row[0:])
     corr_mat = Statistics.corr(features, method="pearson")
+    corr_mat = np.abs(corr_mat)
     corr_df = pd.DataFrame(corr_mat)
     corr_df.index, corr_df.columns = col_names, col_names
     upper = corr_df.where(np.triu(np.ones(corr_df.shape), k=1).astype(np.bool))
@@ -121,5 +122,3 @@ if __name__ == '__main__':
     out_dir = sys.argv[1]
     home_credit_model = model_training()
     home_credit_model.save(out_dir)
-
-

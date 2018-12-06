@@ -180,10 +180,60 @@ def ETL():
     application_train = application_train.join(client_previous_data_encoded, 'sk_id_curr', how = 'left_outer')
     ready_train = application_train.join(client_bureau_data_encoded, 'sk_id_curr', how = 'left_outer')
 
+    ###################################
+   
+    train_cat_encoded = get_dummies_spark(ready_train,'sk_id_curr','ready_train')
+    numerical_feats = [f for f, t in ready_train.dtypes if t != 'string']
+    train_num_df = ready_train.select(numerical_feats)
+    ready_train = train_cat_encoded.join(train_num_df,on = 'sk_id_curr')
+    print('************finished one-hot-encoding the training set******************')
+    print('*************total number of features we have***********************',len(ready_train.columns))
+
+    # test_cat_encoded = get_dummies_spark(ready_test, 'sk_id_curr', 'ready_test')
+    # numerical_feats = [f for f, t in ready_test.dtypes if t != 'string']
+    # test_num_df = ready_test.select(numerical_feats)
+    # ready_test = test_cat_encoded.join(test_num_df, on='sk_id_curr')
+
+    #####################################
+    # feature generation
+    '''
+    CREDIT_INCOME_PERCENT: the percentage of the credit amount relative to a client's income
+    ANNUITY_INCOME_PERCENT: the percentage of the loan annuity relative to a client's income
+    CREDIT_TERM:  the length of the payment in months (since the annuity is the monthly amount due
+    '''
+    ready_train = ready_train.withColumn('credit_income_percent', ready_train.amt_credit / ready_train.amt_income_total)
+    ready_train = ready_train.withColumn('annuity_income_percent', ready_train.amt_annuity/ ready_train.amt_income_total)
+    ready_train = ready_train.withColumn('credit_term', ready_train.amt_annuity/ ready_train.amt_credit)
+    print('**************finished generating features from domain knowledge*************')
+
     # testing
 
     application_test = application_test.join(client_previous_data_encoded,'sk_id_curr', how='left_outer')
     ready_test = application_test.join(client_bureau_data_encoded,'sk_id_curr', how='left_outer')
+
+    test_cat_encoded = get_dummies_spark(ready_test,'sk_id_curr','ready_test')
+    numerical_feats = [f for f, t in ready_test.dtypes if t != 'string']
+    test_num_df = ready_test.select(numerical_feats)
+    ready_test = test_cat_encoded.join(test_num_df,on = 'sk_id_curr')
+    print('************finished one-hot-encoding the testing set******************')
+    print('*************total number of features we have***********************',len(ready_test.columns))
+
+    # test_cat_encoded = get_dummies_spark(ready_test, 'sk_id_curr', 'ready_test')
+    # numerical_feats = [f for f, t in ready_test.dtypes if t != 'string']
+    # test_num_df = ready_test.select(numerical_feats)
+    # ready_test = test_cat_encoded.join(test_num_df, on='sk_id_curr')
+
+    #####################################
+    # feature generation
+    '''
+    CREDIT_INCOME_PERCENT: the percentage of the credit amount relative to a client's income
+    ANNUITY_INCOME_PERCENT: the percentage of the loan annuity relative to a client's income
+    CREDIT_TERM:  the length of the payment in months (since the annuity is the monthly amount due
+    '''
+    ready_test = ready_test.withColumn('credit_income_percent', ready_test.amt_credit / ready_test.amt_income_total)
+    ready_test = ready_test.withColumn('annuity_income_percent', ready_test.amt_annuity/ ready_test.amt_income_total)
+    ready_test = ready_test.withColumn('credit_term', ready_test.amt_annuity/ ready_test.amt_credit)
+    print('**************finished generating features from domain knowledge*************')
 
     return ready_train, ready_test
 
