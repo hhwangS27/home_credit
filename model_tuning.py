@@ -35,9 +35,9 @@ def model_tuning():
 
     data = data.select('target','features')
 
-    trainD, testD = data.randomSplit([0.75, 0.25])
-    trainD.cache()
-    testD.cache()
+    data = data.cache()
+
+    Ndata = data.count()
 
     #############################################
     # use area under ROC instead of accuracy since we have unbalanced datasets (default metric for binaryclassificationevaluator)
@@ -51,10 +51,11 @@ def model_tuning():
     for maxI in maxIter:
         for maxD in maxDepthes:
             for stepS in stepSize:
+                for valStar in range(0, , )
 
                 print("start tuning for maxI:{} maxD:{} stepS:{}".format(maxI, maxD, stepS))
 
-                gbt = GBTClassifier(labelCol='target', predictionCol='prediction', 
+                gbt = GBTClassifier(labelCol='target', predictionCol='prediction',
                                      maxIter=maxI, maxDepth=maxD, stepSize=stepS)
                                      #maxBins=60, maxIter=maxI, maxDepth=maxd, stepSize=stepS)
                 model = gbt.fit(trainD)
