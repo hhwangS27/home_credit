@@ -38,7 +38,7 @@ def model_training():
      generalization performance on the test set. We want to remove these features.
     '''
     # Threshold for removing correlated variables = 0.8
-    threshold = 0.85
+    threshold = 0.8
     df = ready_train.drop('sk_id_curr').drop('target')
     col_names = df.columns
     features = df.rdd.map(lambda row: row[0:])
@@ -102,9 +102,9 @@ def model_training():
     # use area under ROC instead of accuracy since we have unbalanced datasets (default metric for binaryclassificationevaluator)
     features = list(set(ready_train.columns) - set(['sk_id_curr', 'target']))
     feature_assembler = VectorAssembler(inputCols=features, outputCol='features')
-    classifier = GBTClassifier(labelCol='target', maxBins=60, maxIter=100)
+    classifier = GBTClassifier(labelCol='target', maxBins=60)
     pipeline = Pipeline(stages=[feature_assembler, classifier])
-    grid = ParamGridBuilder().addGrid(classifier.maxDepth,[6]).addGrid(classifier.stepSize,[0.05]).build()
+    grid = ParamGridBuilder().addGrid(classifier.maxDepth,[3,4,5,6]).addGrid(classifier.stepSize,[0.005, 0.02, 0.16, 0.64]).addGrid(classifier.maxIter,[20, 50, 80]).build()
     evaluator = BinaryClassificationEvaluator(labelCol='target')
     cv = CrossValidator(estimator=pipeline, estimatorParamMaps=grid, evaluator=evaluator, numFolds= 5)
     cv_model = cv.fit(ready_train.fillna(-999999))
